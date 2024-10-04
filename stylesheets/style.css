@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+    --color-primary: #334C74;
+    --color-secondary: #4A6FA5;
+    --color-accent: #6B98D6;
+    --color-background: #F0F4F8;
+    --color-text: #2D3748;
+    --color-button-text: #FFFFFF;
+    --color-get: #4CAF50;
+    --color-post: #2196F3;
+    --color-put: #FF9800;
+    --color-delete: #F44336;
+    --color-patch: #9C27B0;
+
+    font-family: 'Montserrat', sans-serif;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quickServe - Responsive API Testing Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body class="bg-background min-h-screen text-text text-sm" style="background-color: var(--color-background); color: var(--color-text);">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-white shadow-md overflow-y-auto flex-shrink-0 hidden lg:block">
+            <div class="p-4">
+                <h2 class="text-lg font-semibold mb-4" style="color: var(--color-primary);">Requests</h2>
+                <ul id="request-list" class="space-y-2"></ul>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-md p-4">
+                <h1 class="text-xl sm:text-2xl font-bold text-center" style="color: var(--color-primary);">quickServe</h1>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-4">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <input id="session-name" type="text" placeholder="Session Name" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2" style="border-color: var(--color-secondary); --tw-ring-color: var(--color-accent);">
+                            <button id="save-session" class="w-full px-4 py-2 rounded transition-colors" style="background-color: var(--color-primary); color: var(--color-button-text);">Save Session</button>
+                        </div>
+                        <div class="space-y-2">
+                            <select id="load-session" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2" style="border-color: var(--color-secondary); --tw-ring-color: var(--color-accent);">
+                                <option value="">Select a session</option>
+                            </select>
+                            <button id="load-session-btn" class="w-full px-4 py-2 rounded transition-colors" style="background-color: var(--color-secondary); color: var(--color-button-text);">Load Session</button>
+                            <button id="delete-session-btn" class="w-full px-4 py-2 rounded transition-colors" style="background-color: var(--color-accent); color: var(--color-button-text);">Delete Session</button>
+                        </div>
+                    </div>
+                    <div id="requests-container" class="space-y-6"></div>
+                    <button id="add-request" class="w-full mt-6 px-4 py-2 rounded transition-colors" style="background-color: var(--color-secondary); color: var(--color-button-text);">
+                        Add Request
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/javascripts/index.js">
+    </script>
+</body>
+</html>
