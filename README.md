@@ -19,7 +19,7 @@ QuickServe is a browser-based API testing platform designed to streamline your d
 
 ### Installation
 
-QuickServe is a web-based application, so no installation is necessary! Simply visit [quickServe](https://quickServe.onrender.com) to start testing your APIs.
+QuickServe is a web-based application, so no installation is necessary! Simply visit [quickServe](https://quickserveapi.onrender.com) to start testing your APIs.
 
 ### Usage
 
