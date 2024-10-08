@@ -14,3 +14,16 @@
 
     font-family: 'Montserrat', sans-serif;
 }
+
+#main-content{
+    min-width: 80dvw !important;
+}
+body{
+    margin-top: 4rem;
+}
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+}
