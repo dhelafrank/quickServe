@@ -19,7 +19,7 @@
     min-width: 80dvw !important;
 }
 body{
-    margin-top: 4rem;
+    margin-top: 10dvh;
 }
 header{
     position: absolute;
