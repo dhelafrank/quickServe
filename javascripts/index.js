@@ -15,6 +15,14 @@ toggleSidebarButton.addEventListener('click', function () {
     mainContent.classList.toggle('sidebar-open');
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+
+    sidebar.addEventListener('mouseleave', function () {
+        sidebar.classList.toggle('hidden');
+        mainContent.classList.toggle('sidebar-open');
+    });
+});
+
 function generateRandomId() {
     return Math.random().toString(36).substr(2, 9);
 }
@@ -140,6 +148,10 @@ function executeRequest(requestElement, executionButton) {
         return acc;
     }, {});
     executionButton.innerText == "Executing..."
+    if(url.includes("localhost") || url.includes("172.0.0")){
+        alert("Localhost Request not Supported")
+        return
+    }
     if (url.length < 4) {
         responseContent.textContent = "Error: Specify a request url";
         executionButton.innerText == "Execute"
