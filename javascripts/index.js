@@ -10,18 +10,24 @@ const toggleSidebarButton = document.getElementById('toggle-sidebar');
 const sidebar = document.getElementById('sidebar');
 const mainContent = document.getElementById('main-content');
 
+//Toggle Sidebar on Mobile on Click
 toggleSidebarButton.addEventListener('click', function () {
     sidebar.classList.toggle('hidden');
     mainContent.classList.toggle('sidebar-open');
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+//Auto Create a New Session on Load
+const sessionName = (`Session_${(Date.now()).toString(28)}`)
+sessionNameInput.value = sessionName
 
+//Remove Sidebar when not in Focus
+document.addEventListener('DOMContentLoaded', function () {
     sidebar.addEventListener('mouseleave', function () {
         sidebar.classList.toggle('hidden');
         mainContent.classList.toggle('sidebar-open');
     });
 });
+
 
 function generateRandomId() {
     return Math.random().toString(36).substr(2, 9);
@@ -80,7 +86,7 @@ function createRequestElement(data = {}) {
 
     const executeButton = requestElement.querySelector('.execute-request');
     executeButton.addEventListener('click', (e) => {
-        executeRequest(requestElement, e.target)
+        executeRequest(requestElement, (e.target))
     });
 
     const addHeaderButton = requestElement.querySelector('.add-header');
@@ -140,21 +146,21 @@ function executeRequest(requestElement, executionButton) {
     const body = requestElement.querySelector('.body-input').value;
     const responseContainer = requestElement.querySelector('.response-container');
     const responseContent = requestElement.querySelector('.response-content');
-    // console.log(executionButton)
+    console.log(executionButton)
     const headers = Array.from(requestElement.querySelectorAll('.header-row')).reduce((acc, row) => {
         const name = row.querySelector('.header-name').value;
         const value = row.querySelector('.header-value').value;
         if (name && value) acc[name] = value;
         return acc;
     }, {});
-    executionButton.innerText == "Executing..."
-    if(url.includes("localhost") || url.includes("172.0.0")){
+    executionButton.innerText = "Executing..."
+    if (url.includes("localhost") || url.includes("172.0.0")) {
         alert("Localhost Request not Supported")
         return
     }
     if (url.length < 4) {
-        responseContent.textContent = "Error: Specify a request url";
-        executionButton.innerText == "Execute"
+        alert("Request URL not Valid!");
+        executionButton.innerText = "Execute"
         return
     }
     const useCorsProxy = requestElement.querySelector('.cors-proxy-toggle').checked;
@@ -193,10 +199,10 @@ function executeRequest(requestElement, executionButton) {
                 return
             }
             responseContent.textContent = data;
-            executionButton.innerText == "Execute"
+            executionButton.innerText = "Execute"
         })
         .catch(error => {
-            executionButton.innerText == "Execute"
+            executionButton.innerText = "Execute"
             console.log(error)
             responseContent.textContent = `${error}`;
             responseContainer.classList.remove('hidden');
@@ -215,7 +221,9 @@ function updateSidebar() {
     });
 }
 
-function saveSession() {
+function saveSession(e) {
+    (e.target).innerText = "Saving..."
+
     const sessionName = sessionNameInput.value.trim();
     if (!sessionName) {
         alert('Please enter a session name');
@@ -245,6 +253,10 @@ function saveSession() {
         };
     } else {
         if (sessions.length >= 5) {
+            const confirmation = confirm("Saving will overwrite the oldest session. Do you wish to continue?");
+            if (!confirmation) {
+                return
+            }
             sessions.shift();
         }
         sessions.push({
@@ -255,9 +267,15 @@ function saveSession() {
 
     localStorage.setItem('quickServe_sessions', JSON.stringify(sessions));
     updateSessionList();
+
+    (e.target).innerText = "Session Saved"
+    setTimeout(() => {
+        (e.target).innerText = "Save Session"
+    }, 1000)
 }
 
-function loadSession() {
+function loadSession(e) {
+    (e.target).innerText = "Loading..."
     const sessionName = loadSessionSelect.value;
     if (!sessionName) return;
 
@@ -272,9 +290,18 @@ function loadSession() {
         });
         updateSidebar();
     }
+
+    sessionNameInput.value = sessionName;
+    (e.target).innerText = "Session Loaded"
+    setTimeout(() => {
+        (e.target).innerText = "Load Session"
+    }, 1000)
+    // alert(`${sessionName} Loaded`)
 }
 
-function deleteSession() {
+function deleteSession(e) {
+    (e.target).innerText = "Deleting..."
+
     const sessionName = loadSessionSelect.value;
     if (!sessionName) {
         alert('Please select a session to delete');
@@ -285,6 +312,12 @@ function deleteSession() {
     const updatedSessions = sessions.filter(s => s.name !== sessionName);
     localStorage.setItem('quickServe_sessions', JSON.stringify(updatedSessions));
     updateSessionList();
+
+    (e.target).innerText = "Session Deleted"
+    setTimeout(() => {
+        (e.target).innerText = "Delete Session"
+    }, 1000)
+    sessionNameInput.value = ""
 }
 
 function updateSessionList() {
@@ -303,6 +336,12 @@ addRequestButton.addEventListener('click', () => {
     requestsContainer.appendChild(newRequest);
     updateSidebar();
 });
+
+//Session Autosave
+// document.addEventListener('DOMContentLoaded', function () {
+//     setInterval(() => {saveSession(false)}, 3000)
+// });
+
 
 saveSessionButton.addEventListener('click', saveSession);
 loadSessionButton.addEventListener('click', loadSession);

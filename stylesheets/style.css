@@ -20,7 +20,9 @@
 }
 body{
     padding-top: 8dvh;
+    overflow-x: hidden;
 }
+
 header{
     position: absolute;
     top: 0;
